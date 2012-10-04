@@ -1,0 +1,153 @@
+body {
+    padding: 2em 1em 2em 70px;
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 16px;
+    color: black;
+    background: white;
+    background-position: top left;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    counter-reset: header1 header2 header3 toc;
+    max-width: 1024px;
+}
+h2:before {
+    counter-increment: header1;
+    content: counter(header1) ". ";
+}
+
+h2 {
+    margin: 6px 0px;
+    padding-top: 12px;
+}
+
+h2 a, h3 a, h4 a {
+    font-size: x-small;
+    text-decoration: none
+}
+
+p {
+    margin-top: 0.5em;
+}
+
+h2 {
+    counter-reset: header2 header3;
+    font-size: 30px;
+}
+h3:before {
+    counter-increment: header2;
+    content: counter(header1) "." counter(header2) ". ";
+}
+h3 {
+    counter-reset: header3;
+    font-size: 20px;
+}
+h4:before {
+    counter-increment: header3;
+    content: counter(header1) "." counter(header2) "." counter(header3) ". ";
+}
+h4 {
+    font-size: 15px;
+}
+
+pre {
+ margin-left: 4em;
+}
+
+/* Borrowed from w3c */
+h1, h2, h3, h4, h5, h6 { 
+    text-align: left
+}
+h1, h2, h3, h4, h5, p.toc-title { 
+    color: #005A9C; 
+    background: white
+}
+h1 { 
+    font: 170% sans-serif
+}
+h2, p.toc-title { 
+    font: 140% sans-serif
+}
+h3 { 
+    font: 120% sans-serif
+}
+h4 { 
+    font: bold 100% sans-serif
+}
+h5 { 
+    font: italic 100% sans-serif; 
+    font-weight: bold
+}
+h6 { 
+    font: small-caps 100% sans-serif
+}
+
+pre, code { 
+    font-family: monospace
+}
+pre { 
+    background: #eee; 
+    border: 1px solid #00a; 
+    padding: 5px;
+    margin: 0 2em;
+}
+
+blockquote  {
+    background:none repeat scroll 0 0 #FCFCFC;
+    border-left:medium double;
+    color:#222222;
+    display:block;
+    margin-left:2em;
+    padding-left:1em;
+}
+table {
+    border-collapse:collapse;
+}
+th {
+    background: #e8edff;
+    color: #337;
+}
+table, td {
+    background: #ffffff;
+    color: #337;
+}
+table, td, th {
+    text-align:left;
+    padding: 4px;
+    padding-left:2em;
+    padding-right:2em;
+    border-bottom: 1px solid #00a;
+    border-left: 1px solid #00a;
+    border-right: 1px solid #00a;
+    border-top: 1px solid #00a;
+}
+.align-left {
+    float: left;
+    margin: 15px;
+}
+.align-right {
+    float: right;
+    margin: 15px;
+}
+
+.box-text {
+    border: 1px solid #BEBEBE;
+    margin: 2em 1em 1em 2em;
+}
+
+.box-tab {
+    margin: 1.5em 0.5em 1em 1em;
+    font-weight: bold;
+    position: relative;
+    padding: 0 0.5em;
+    top: -1em;
+    background: white;
+}
+
+.box-content {
+    margin: 1.5em 0.5em 1em 1em;
+    position: relative;
+    top: -2em;
+    padding: 0;
+    margin: 1.5em 0.5em -1em 1em;
+}

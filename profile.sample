@@ -1,0 +1,5 @@
+export PS1="\[\033]0;\u@\h:\w\007\]\u@\h:\W\\$ "
+
+alias edit="emacsclient -t"
+alias nedit="emacsclient -nc"
+export ALTERNATE_EDITOR= EDITOR=emacsclient VISUAL=emacsclient
