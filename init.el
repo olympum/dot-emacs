@@ -40,6 +40,7 @@
                       smex
                       align-cljlet
                       nrepl-eval-sexp-fu
+                      scss-mode
                       ))
 
 (dolist (p my-packages)
