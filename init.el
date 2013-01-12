@@ -59,7 +59,6 @@
 (global-rainbow-delimiters-mode)
 
 ;; auto-complete
-(add-to-list 'load-path "~/.emacs.d/")
 (require 'auto-complete-config)
 (ac-config-default)
 
@@ -253,3 +252,6 @@
 
 ;; themes
 (load-theme 'cyberpunk t)
+
+;; avoid compiling scss at save
+(setq scss-compile-at-save nil)
