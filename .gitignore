@@ -3,3 +3,7 @@ places
 ac-comphist.dat
 elpa
 url
+.emacs.desktop*
+auto-save-list
+backups
+eshell
