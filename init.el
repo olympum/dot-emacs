@@ -31,6 +31,7 @@
                       clojure-test-mode
                       elisp-slime-nav
                       find-file-in-project
+                      go-mode
                       idle-highlight-mode
                       ido-ubiquitous
                       magit
@@ -59,6 +60,14 @@
 (global-rainbow-delimiters-mode)
 
 ;; auto-complete
+
+;; the following three lines are required to add gocode autocomplete
+;; to auto-complete mode, and should be removed as soon as this code
+;; merges into the ac mode.
+(add-to-list 'load-path "~/.emacs.d/vendor/autocomplete")
+(setq exec-path (append exec-path '("/usr/local/bin")))
+(require 'go-autocomplete)
+
 (require 'auto-complete-config)
 (ac-config-default)
 
