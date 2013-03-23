@@ -49,6 +49,10 @@
     (package-install p)))
 
 
+(add-to-list 'exec-path "/usr/local/bin")
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
 ;; Useful global settings as Emacs is used predominantely for Clojure development
 
 ;; Launch the Clojure repl via Leiningen - M-x clojure-jack-in 
@@ -65,7 +69,6 @@
 ;; to auto-complete mode, and should be removed as soon as this code
 ;; merges into the ac mode.
 (add-to-list 'load-path "~/.emacs.d/vendor/autocomplete")
-(setq exec-path (append exec-path '("/usr/local/bin")))
 (require 'go-autocomplete)
 
 (require 'auto-complete-config)
@@ -197,13 +200,6 @@
 (add-to-list 'auto-mode-alist '("\\.txt" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
 (setq markdown-css-path  (substitute-in-file-name "$HOME/.emacs.d/main.css"))
-
-;; Fullscreen mode on Cocoa
-
-(if (fboundp 'ns-toggle-fullscreen)
-    (global-set-key [(meta return)] 'ns-toggle-fullscreen))
-
-;;(when window-system (color-theme-solarized-dark))
 
 ;; fix the PATH variable
 ;; Commenting this code since the right fix under OS X is to modify
