@@ -236,6 +236,8 @@
 (setq speedbar-show-unknown-files t)
 
 (set-frame-font "Menlo-12")
+(setq frame-title-format t)
+
 ;;(load-theme 'wheatgrass)
 ;;(load-theme 'tango-dark)
 
