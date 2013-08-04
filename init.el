@@ -43,6 +43,8 @@
                       nrepl-eval-sexp-fu
                       scss-mode
                       scala-mode2
+                      tree-mode
+                      monokai-theme
                       ))
 
 (dolist (p my-packages)
@@ -63,6 +65,20 @@
 
 ;; Colour mach parens and other structure characters to make code easy to follow
 (global-rainbow-delimiters-mode)
+
+;; ;; scala
+;; ;; load the ensime lisp code...
+;; (add-to-list 'load-path "~/.emacs.d/vendor/ensime/elisp/")
+;; (require 'ensime)
+
+;; ;; This step causes the ensime-mode to be started whenever
+;; ;; scala-mode is started for a buffer. You may have to customize this step
+;; ;; if you're not using the standard scala mode.
+;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+;; dirtree
+(add-to-list 'load-path "~/.emacs.d/vendor/dirtree")
+(autoload 'dirtree "dirtree" "Add directory to tree view" t)
 
 ;; auto-complete
 
@@ -257,7 +273,11 @@
 (add-hook 'prog-mode-hook 'turn-off-flyspell t)
 
 ;; themes
-(load-theme 'cyberpunk t)
+(load-theme 'monokai t)
+
+;;(set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
+;;(set-frame-parameter (selected-frame) 'alpha '(90 90))
+;;(add-to-list 'default-frame-alist '(alpha 90 90))
 
 ;; avoid compiling scss at save
 (setq scss-compile-at-save nil)
