@@ -45,12 +45,12 @@
                       scala-mode2
                       tree-mode
                       monokai-theme
+                      flycheck
                       ))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
-
 
 (add-to-list 'exec-path "/usr/local/bin")
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
@@ -80,7 +80,20 @@
 (add-to-list 'load-path "~/.emacs.d/vendor/dirtree")
 (autoload 'dirtree "dirtree" "Add directory to tree view" t)
 
-;; auto-complete
+;; golang settings requires godef (for jumping into symbol definition
+;; and gocode for expanding / autocomplete symbol signatures)
+;;
+;; go get code.google.com/p/rog-go/exp/cmd/godef
+;;
+;; go get -u github.com/nsf/gocode
+;;
+;; See also: http://honnef.co/posts/2013/03/writing_go_in_emacs/
+
+(setenv "GOPATH" (concat (getenv "HOME") "/Projects/golang"))
+(setenv "PATH" (concat (getenv "PATH") ":" (concat (getenv "HOME") "/Projects/golang/bin")))
+(setq exec-path (append exec-path (list (expand-file-name (concat (getenv "HOME") "/Projects/golang/bin")))))
+
+(add-hook 'before-save-hook 'gofmt-before-save)
 
 ;; the following three lines are required to add gocode autocomplete
 ;; to auto-complete mode, and should be removed as soon as this code
@@ -88,6 +101,8 @@
 (add-to-list 'load-path "~/.emacs.d/vendor/autocomplete")
 (require 'go-autocomplete)
 (require 'auto-complete-config)
+
+;; auto-complete
 
 (ac-config-default)
 
@@ -253,9 +268,6 @@
 
 (set-frame-font "Menlo-12")
 (setq frame-title-format t)
-
-;;(load-theme 'wheatgrass)
-;;(load-theme 'tango-dark)
 
 ;; rebind the shift-up xterm event to S-up since
 ;; emacs thinks it's <select>
