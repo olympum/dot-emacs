@@ -68,7 +68,8 @@
 
 ;; the following three lines are required to add gocode autocomplete
 ;; to auto-complete mode, and should be removed as soon as this code
-;; merges into the ac mode.
+;; merges into the ac mode. for this to ac mode to run with go files,
+;; the gocode executable must be found in the exec-path.
 (add-to-list 'load-path "~/.emacs.d/vendor/autocomplete")
 (require 'go-autocomplete)
 (require 'auto-complete-config)
@@ -202,9 +203,20 @@
 (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
 (setq markdown-css-path  (substitute-in-file-name "$HOME/.emacs.d/main.css"))
 
+;; Requires Marked.app installed (non free - highly recommended though
+;; to preview markdown).
+(defun markdown-preview-file ()
+  "run Marked on the current file and revert the buffer"
+  (interactive)
+  (shell-command 
+   (format "open -a /Applications/Marked.app %s" 
+       (shell-quote-argument (buffer-file-name))))
+)
+(global-set-key "\C-cm" 'markdown-preview-file)
+
 ;; fix the PATH variable
 ;; Commenting this code since the right fix under OS X is to modify
-;; /etc/path and ~/.MacOSX/environment.plist with the list of paths
+;; /etc/paths and ~/.MacOSX/environment.plist with the list of paths
 ;;
 ;; (defun set-exec-path-from-shell-PATH ()
 ;;   (let ((path-from-shell (shell-command-to-string "$SHELL -i -c 'echo $PATH'")))
@@ -238,11 +250,7 @@
 (set-frame-font "Menlo-12")
 (setq frame-title-format t)
 
-;;(load-theme 'wheatgrass)
-;;(load-theme 'tango-dark)
-
-;; rebind the shift-up xterm event to S-up since
-;; emacs thinks it's <select>
+;; rebind the shift-up xterm event to S-up since emacs thinks it's <select>
 (if (equal "xterm" (tty-type))
     (define-key input-decode-map "\e[1;2A" [S-up]))
 
