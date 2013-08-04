@@ -43,12 +43,14 @@
                       nrepl-eval-sexp-fu
                       scss-mode
                       scala-mode2
+                      tree-mode
+                      monokai-theme
+                      flycheck
                       ))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
-
 
 (add-to-list 'exec-path "/usr/local/bin")
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
@@ -64,7 +66,34 @@
 ;; Colour mach parens and other structure characters to make code easy to follow
 (global-rainbow-delimiters-mode)
 
-;; auto-complete
+;; ;; scala
+;; ;; load the ensime lisp code...
+;; (add-to-list 'load-path "~/.emacs.d/vendor/ensime/elisp/")
+;; (require 'ensime)
+
+;; ;; This step causes the ensime-mode to be started whenever
+;; ;; scala-mode is started for a buffer. You may have to customize this step
+;; ;; if you're not using the standard scala mode.
+;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+
+;; dirtree
+(add-to-list 'load-path "~/.emacs.d/vendor/dirtree")
+(autoload 'dirtree "dirtree" "Add directory to tree view" t)
+
+;; golang settings requires godef (for jumping into symbol definition
+;; and gocode for expanding / autocomplete symbol signatures)
+;;
+;; go get code.google.com/p/rog-go/exp/cmd/godef
+;;
+;; go get -u github.com/nsf/gocode
+;;
+;; See also: http://honnef.co/posts/2013/03/writing_go_in_emacs/
+
+(setenv "GOPATH" (concat (getenv "HOME") "/Projects/golang"))
+(setenv "PATH" (concat (getenv "PATH") ":" (concat (getenv "HOME") "/Projects/golang/bin")))
+(setq exec-path (append exec-path (list (expand-file-name (concat (getenv "HOME") "/Projects/golang/bin")))))
+
+(add-hook 'before-save-hook 'gofmt-before-save)
 
 ;; the following three lines are required to add gocode autocomplete
 ;; to auto-complete mode, and should be removed as soon as this code
@@ -73,6 +102,8 @@
 (add-to-list 'load-path "~/.emacs.d/vendor/autocomplete")
 (require 'go-autocomplete)
 (require 'auto-complete-config)
+
+;; auto-complete
 
 (ac-config-default)
 
@@ -267,7 +298,11 @@
 (add-hook 'prog-mode-hook 'turn-off-flyspell t)
 
 ;; themes
-(load-theme 'cyberpunk t)
+(load-theme 'monokai t)
+
+;;(set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
+;;(set-frame-parameter (selected-frame) 'alpha '(90 90))
+;;(add-to-list 'default-frame-alist '(alpha 90 90))
 
 ;; avoid compiling scss at save
 (setq scss-compile-at-save nil)
