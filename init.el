@@ -45,6 +45,8 @@
                       scala-mode2
                       tree-mode
                       monokai-theme
+                      zenburn-theme
+                      sublime-themes
                       flycheck
                       ))
 
@@ -298,7 +300,9 @@
 (add-hook 'prog-mode-hook 'turn-off-flyspell t)
 
 ;; themes
-(load-theme 'monokai t)
+;;(load-theme 'monokai t)
+;;(load-theme 'zenburn t)
+(load-theme 'spolsky t) ;; from sublime-themes package
 
 ;;(set-frame-parameter (selected-frame) 'alpha '(<active> [<inactive>]))
 ;;(set-frame-parameter (selected-frame) 'alpha '(90 90))
