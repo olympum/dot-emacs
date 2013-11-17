@@ -291,9 +291,9 @@
 
 ;; setup alternate keyboard mappings
 ;; leave right alt as dead key for special chars
-(setq ns-alternate-modifier (quote meta))
+(setq ns-alternate-modifier nil)
 ;; use left alt as meta
-(setq ns-left-alternate-modifier nil)
+(setq ns-right-alternate-modifier (quote meta))
 
 ;; disable flyspell
 (add-hook 'text-mode-hook 'turn-off-flyspell t)
