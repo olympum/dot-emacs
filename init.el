@@ -290,10 +290,10 @@
 (windmove-default-keybindings)
 
 ;; setup alternate keyboard mappings
-;; leave left alt as dead key for special chars
+;; leave right alt as dead key for special chars
 (setq ns-alternate-modifier (quote meta))
-;; use right alt as meta
-(setq ns-right-alternate-modifier nil)
+;; use left alt as meta
+(setq ns-left-alternate-modifier nil)
 
 ;; disable flyspell
 (add-hook 'text-mode-hook 'turn-off-flyspell t)
