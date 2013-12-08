@@ -14,41 +14,52 @@
 (when (not package-archive-contents)
  	(package-refresh-contents))
 
-(defvar my-packages '(starter-kit
-                      starter-kit-lisp
-                      starter-kit-eshell
-                      starter-kit-bindings
-                      starter-kit-js
-                      clojure-mode
-                      clojure-test-mode
-                      rainbow-delimiters
+(defvar my-packages '(ac-nrepl
                       ac-slime
-                      markdown-mode
-                      popup
-                      ac-nrepl
-                      cyberpunk-theme
+                      align-cljlet
+                      auto-complete
+                      cider
                       clojure-mode
                       clojure-test-mode
+                      cyberpunk-theme
+                      dash
+                      direx
                       elisp-slime-nav
+                      epl
+                      f
                       find-file-in-project
+                      flycheck
+                      git-commit-mode
+                      git-rebase-mode
+                      go-autocomplete
+                      go-direx
+                      go-eldoc
+                      go-errcheck
                       go-mode
                       idle-highlight-mode
                       ido-ubiquitous
                       magit
-                      nrepl
-                      paredit
-                      protobuf-mode
-                      smex
-                      align-cljlet
-                      nrepl-eval-sexp-fu
-                      scss-mode
-                      scala-mode2
-                      tree-mode
+                      markdown-mode
                       monokai-theme
-                      zenburn-theme
+                      nrepl
+                      nrepl-eval-sexp-fu
+                      paredit
+                      pkg-info
+                      popup
+                      protobuf-mode
+                      rainbow-delimiters
+                      s
+                      scala-mode2
+                      scss-mode
+                      smex
+                      starter-kit
+                      starter-kit-bindings
+                      starter-kit-eshell
+                      starter-kit-js
+                      starter-kit-lisp
                       sublime-themes
-                      flycheck
-                      ))
+                      tree-mode
+                      zenburn-theme))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -291,9 +302,9 @@
 
 ;; setup alternate keyboard mappings
 ;; leave right alt as dead key for special chars
-(setq ns-alternate-modifier nil)
+(setq ns-alternate-modifier (quote meta))
 ;; use left alt as meta
-(setq ns-right-alternate-modifier (quote meta))
+(setq ns-right-alternate-modifier nil)
 
 ;; disable flyspell
 (add-hook 'text-mode-hook 'turn-off-flyspell t)
