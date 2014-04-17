@@ -1,16 +1,42 @@
-dot-emacs
-=========
+# dot-emacs
 
-My Emacs configuration files. Requires Emacs 24. Key things I need
-that it provides:
+My Emacs 24 configuration files with support for:
 
 * Javascript
 * Scala
 * Clojure
 * Markdown
+* Golang
 
 ## Go (Golang)
 
-I have added some Go support, but I am not actively using Go. To get
-go running, godef and golang are required. I have set my GOPATH in the
-init file, I am sure there are better ways.
+I am using `godef` to jump to definition, `gocode` for completition
+and `goflymake` for on-the-fly syntax check (`gofmt` will only check
+static syntax errors). To install these packages, ensure your `GOPATH`
+and `GOROOT` environment variables are correctly setup. This is what I
+have in my `~/.profile` file:
+
+    # for terminal apps
+    export GOPATH=$HOME/Projects/golang
+    export PATH=$PATH:$GOPATH/bin
+    export GOROOT=`go env GOROOT`
+    export PATH=$PATH:$GOROOT/bin
+
+    # for non-terminal apps
+    launchctl setenv GOPATH $GOPATH
+    launchctl setenv GOROOT $GOROOT
+    launchctl setenv PATH $PATH
+
+To install the packages:
+
+    go get -u github.com/dougm/goflymake
+    go get -u code.google.com/p/rog-go/exp/cmd/godef
+    go get -u github.com/nsf/gocode
+
+I have setup `$HOME/Projects/golang` to be my home for Go projects, so
+in the emacs `init.el` file you'll find:
+
+    (setenv "GOPATH" (concat (getenv "HOME") "/Projects/golang"))
+    (setenv "PATH" (concat (getenv "PATH") ":" (concat (getenv "HOME") "/Projects/golang/bin")))
+    (setq exec-path (append exec-path (list (expand-file-name (concat (getenv "HOME") "/Projects/golang/bin")))))
+
