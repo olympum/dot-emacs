@@ -38,6 +38,16 @@
   (require 'cl)
   (require 'auto-complete))
 
+;; Close gocode daemon at exit unless it was already running
+(eval-after-load "go-mode"
+  '(progn
+     (let* ((user (or (getenv "USER") "all"))
+            (sock (format (concat temporary-file-directory "gocode-daemon.%s") user)))
+       (unless (file-exists-p sock)
+         (add-hook 'kill-emacs-hook #'(lambda ()
+                                        (ignore-errors
+                                          (call-process "gocode" nil nil nil "close"))))))))
+
 ;(defvar go-reserved-keywords
 ;  '("break" "case" "chan" "const" "continue" "default" "defer" "else"
 ;    "fallthrough" "for" "func" "go" "goto" "if" "import" "interface"
@@ -68,18 +78,19 @@
 
 (defun ac-go-invoke-autocomplete ()
   (let ((temp-buffer (generate-new-buffer "*gocode*")))
-    (prog2
-	(call-process-region (point-min)
-			     (point-max)
-			     "gocode"
-			     nil
-			     temp-buffer
-			     nil
-			     "-f=emacs"
-			     "autocomplete"
-			     (or (buffer-file-name) "")
-			     (concat "c" (int-to-string (- (point) 1))))
-	(with-current-buffer temp-buffer (buffer-string))
+    (unwind-protect
+        (progn
+          (call-process-region (point-min)
+                               (point-max)
+                               "gocode"
+                               nil
+                               temp-buffer
+                               nil
+                               "-f=emacs"
+                               "autocomplete"
+                               (or (buffer-file-name) "")
+                               (concat "c" (int-to-string (- (point) 1))))
+          (with-current-buffer temp-buffer (buffer-string)))
       (kill-buffer temp-buffer))))
 
 (defun ac-go-format-autocomplete (buffer-contents)

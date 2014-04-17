@@ -116,6 +116,10 @@
 (require 'go-autocomplete)
 (require 'auto-complete-config)
 
+(add-to-list 'load-path "~/.emacs.d/vendor/goflymake")
+(require 'go-flycheck)
+(add-hook 'go-mode-hook 'flycheck-mode)
+
 ;; auto-complete
 
 (ac-config-default)
