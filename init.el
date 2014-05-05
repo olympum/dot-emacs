@@ -38,6 +38,7 @@
                       go-mode
                       idle-highlight-mode
                       ido-ubiquitous
+                      js2-mode
                       magit
                       markdown-mode
                       monokai-theme
@@ -55,7 +56,6 @@
                       starter-kit
                       starter-kit-bindings
                       starter-kit-eshell
-                      starter-kit-js
                       starter-kit-lisp
                       sublime-themes
                       tree-mode
@@ -231,6 +231,19 @@
 (add-hook 'nrepl-interaction-mode-hook 'ac-nrepl-setup)
 (eval-after-load "auto-complete"
   '(add-to-list 'ac-modes 'nrepl-mode))
+
+;; javascript use js2-mode instead of built-in js-mode (formerly
+;; espresso-mode)
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+
+(setq js-indent-level 2)
+(setq js2-indent-level 2)
+(setq js2-basic-offset 2)
+
+(add-hook 'js2-mode-hook '(lambda ()
+                            (local-set-key (kbd "RET") 'newline-and-indent)))
 
 ;;;;;;;;;;;;;;;;;;;;
 ;; set up unicode
