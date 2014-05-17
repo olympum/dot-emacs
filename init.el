@@ -16,6 +16,7 @@
 
 (defvar my-packages '(ac-nrepl
                       ac-slime
+                      ac-js2
                       align-cljlet
                       auto-complete
                       cider
@@ -36,9 +37,14 @@
                       go-eldoc
                       go-errcheck
                       go-mode
+                      handlebars-mode
                       idle-highlight-mode
                       ido-ubiquitous
                       js2-mode
+                      js2-refactor
+                      json-mode
+                      json-reformat
+                      less-css-mode
                       magit
                       markdown-mode
                       monokai-theme
@@ -58,8 +64,8 @@
                       starter-kit-eshell
                       starter-kit-lisp
                       sublime-themes
-                      tree-mode
-                      zenburn-theme))
+                      tree-mode)
+  zenburn-theme)
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
