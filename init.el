@@ -59,13 +59,13 @@
                       scala-mode2
                       scss-mode
                       smex
+                      sr-speedbar
                       starter-kit
                       starter-kit-bindings
                       starter-kit-eshell
                       starter-kit-lisp
                       sublime-themes
-                      tree-mode)
-  zenburn-theme)
+                      tree-mode))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
