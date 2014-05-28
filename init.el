@@ -75,6 +75,14 @@
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
+;; frame geometry
+; default window width and height
+(defun custom-set-frame-size ()
+  (add-to-list 'default-frame-alist '(height . 65))
+  (add-to-list 'default-frame-alist '(width . 99)))
+(custom-set-frame-size)
+(add-hook 'before-make-frame-hook 'custom-set-frame-size)
+
 ;; Useful global settings as Emacs is used predominantely for Clojure development
 
 ;; Launch the Clojure repl via Leiningen - M-x clojure-jack-in 
