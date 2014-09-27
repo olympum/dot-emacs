@@ -90,9 +90,6 @@
 
 (global-set-key (kbd "C-c C-j") 'clojure-jack-in)
 
-;; Colour mach parens and other structure characters to make code easy to follow
-(global-rainbow-delimiters-mode)
-
 ;; ;; scala
 ;; ;; load the ensime lisp code...
 ;; (add-to-list 'load-path "~/.emacs.d/vendor/ensime/elisp/")
