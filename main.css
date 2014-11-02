@@ -1,7 +1,7 @@
 body {
     padding: 2em 1em 2em 70px;
     margin: 0;
-    font-family: sans-serif;
+    font-family: "Avenir Next", sans-serif !important;
     font-size: 16px;
     color: black;
     background: white;
@@ -59,7 +59,7 @@ h1, h2, h3, h4, h5, h6 {
     text-align: left
 }
 h1, h2, h3, h4, h5, p.toc-title { 
-    color: #005A9C; 
+    color: rgb(6,132,174); 
     background: white
 }
 h1 { 
