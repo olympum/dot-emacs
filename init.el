@@ -75,6 +75,10 @@
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
+(add-to-list 'exec-path "/usr/texbin")
+(setenv "PATH" (concat (getenv "PATH") ":/usr/texbin"))
+(setq exec-path (append exec-path '("/usr/texbin")))
+
 ;; frame geometry
 ; default window width and height
 (defun custom-set-frame-size ()
@@ -193,6 +197,7 @@
 
 (require 'clojure-mode)
 
+
 (add-hook 'clojure-mode-hook
           (lambda ()
             (paredit-mode)
@@ -273,7 +278,7 @@
 (setq markdown-command "~/.emacs.d/markdown.pl | ~/.emacs.d/SmartyPants.pl")
 (add-to-list 'auto-mode-alist '("\\.txt" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md" . markdown-mode))
-(setq markdown-css-path  (substitute-in-file-name "$HOME/.emacs.d/main.css"))
+;;(setq markdown-css-path  (substitute-in-file-name "$HOME/.emacs.d/main.css"))
 
 ;; Requires Marked.app installed (non free - highly recommended though
 ;; to preview markdown).
@@ -347,5 +352,23 @@
 ;;(set-frame-parameter (selected-frame) 'alpha '(90 90))
 ;;(add-to-list 'default-frame-alist '(alpha 90 90))
 
+;; disable the bell work-around for El Capitan
+(setq visible-bell nil) ;; The default
+(setq ring-bell-function 'ignore)
+
 ;; avoid compiling scss at save
 (setq scss-compile-at-save nil)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(weblogger-config-alist
+   (quote
+    (("nexar-staging" "http://staging.www.getnexar.com/xmlrpc.php" "bruno" "" "1")))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
