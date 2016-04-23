@@ -37,6 +37,7 @@
                       go-eldoc
                       go-errcheck
                       go-mode
+                      golint
                       handlebars-mode
                       idle-highlight-mode
                       ido-ubiquitous
