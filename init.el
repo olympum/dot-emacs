@@ -21,7 +21,6 @@
                       auto-complete
                       cider
                       clojure-mode
-                      clojure-test-mode
                       cyberpunk-theme
                       dash
                       direx
@@ -30,8 +29,6 @@
                       f
                       find-file-in-project
                       flycheck
-                      git-commit-mode
-                      git-rebase-mode
                       go-autocomplete
                       go-direx
                       go-eldoc
@@ -49,7 +46,6 @@
                       magit
                       markdown-mode
                       monokai-theme
-                      nrepl
                       nrepl-eval-sexp-fu
                       paredit
                       pkg-info
@@ -57,7 +53,6 @@
                       protobuf-mode
                       rainbow-delimiters
                       s
-                      scala-mode2
                       scss-mode
                       smex
                       sr-speedbar
@@ -364,6 +359,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (tree-mode sublime-themes starter-kit-lisp starter-kit-eshell starter-kit-bindings starter-kit sr-speedbar smex scss-mode rainbow-delimiters protobuf-mode paredit nrepl-eval-sexp-fu monokai-theme markdown-mode magit less-css-mode json-mode js2-refactor ido-ubiquitous idle-highlight-mode handlebars-mode golint go-errcheck go-eldoc go-direx go-autocomplete flycheck find-file-in-project f elisp-slime-nav cyberpunk-theme align-cljlet ac-slime ac-nrepl ac-js2)))
  '(weblogger-config-alist
    (quote
     (("nexar-staging" "http://staging.www.getnexar.com/xmlrpc.php" "bruno" "" "1")))))

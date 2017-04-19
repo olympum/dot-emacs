@@ -30,7 +30,7 @@ have in my `~/.profile` file:
 To install the packages:
 
     go get -u github.com/dougm/goflymake
-    go get -u code.google.com/p/rog-go/exp/cmd/godef
+    go get -u github.com/rogpeppe/godef
     go get -u github.com/nsf/gocode
 
 I have setup `$HOME/Projects/golang` to be my home for Go projects, so
