@@ -3,12 +3,14 @@
 ;; requires emacs 24+
 ;;;
 
-(require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
+(require 'package)
+;; (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
+;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+;; and `package-pinned-packages`. Most users will not need or want to do this.
+;; (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
 (when (not package-archive-contents)
@@ -20,11 +22,11 @@
                       align-cljlet
                       auto-complete
                       cider
-                      clojure-mode
                       cyberpunk-theme
                       dash
                       direx
                       elisp-slime-nav
+                      elpy
                       epl
                       f
                       find-file-in-project
@@ -55,6 +57,7 @@
                       s
                       scss-mode
                       smex
+                      sphinx-doc
                       sr-speedbar
                       starter-kit
                       starter-kit-bindings
@@ -71,6 +74,10 @@
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
+(add-to-list 'exec-path "/opt/homebrew/bin")
+(setenv "PATH" (concat (getenv "PATH") ":/opt/homebrew/bin"))
+(setq exec-path (append exec-path '("/opt/homebrew/bin")))
+
 (add-to-list 'exec-path "/usr/texbin")
 (setenv "PATH" (concat (getenv "PATH") ":/usr/texbin"))
 (setq exec-path (append exec-path '("/usr/texbin")))
@@ -82,13 +89,6 @@
   (add-to-list 'default-frame-alist '(width . 120)))
 (custom-set-frame-size)
 (add-hook 'before-make-frame-hook 'custom-set-frame-size)
-
-;; Useful global settings as Emacs is used predominantely for Clojure development
-
-;; Launch the Clojure repl via Leiningen - M-x clojure-jack-in 
-;; Global shortcut definition to fire up clojure repl and connect to it
-
-(global-set-key (kbd "C-c C-j") 'clojure-jack-in)
 
 ;; ;; scala
 ;; ;; load the ensime lisp code...
@@ -154,7 +154,7 @@
 
 (dolist (mode '(magit-log-edit-mode log-edit-mode org-mode text-mode haml-mode
                 sass-mode yaml-mode csv-mode espresso-mode haskell-mode
-                html-mode nxml-mode sh-mode smarty-mode clojure-mode
+                html-mode nxml-mode sh-mode smarty-mode
                 lisp-mode textile-mode markdown-mode tuareg-mode))
   (add-to-list 'ac-modes mode))
 
@@ -165,53 +165,11 @@
 (define-key ac-completing-map (kbd "M-RET") 'ac-help)
 (define-key ac-completing-map "\r" 'nil)
 
-;; clojure setup
-
-(eval-after-load 'clojure-mode
-  '(font-lock-add-keywords
-    'clojure-mode `(("(\\(fn\\)[\[[:space:]]"
-                     (0 (progn (compose-region (match-beginning 1)
-                                               (match-end 1) "λ")
-                               nil))))))
-
-(eval-after-load 'clojure-mode
-  '(font-lock-add-keywords
-    'clojure-mode `(("\\(#\\)("
-                     (0 (progn (compose-region (match-beginning 1)
-                                               (match-end 1) "ƒ")
-                               nil))))))
-
-(eval-after-load 'clojure-mode
-  '(font-lock-add-keywords
-    'clojure-mode `(("\\(#\\){"
-                     (0 (progn (compose-region (match-beginning 1)
-                                               (match-end 1) "∈")
-                               nil))))))
-
-(eval-after-load 'find-file-in-project
-  '(add-to-list 'ffip-patterns "*.clj"))
-
-(require 'clojure-mode)
-
-
-(add-hook 'clojure-mode-hook
-          (lambda ()
-            (paredit-mode)
-            (rainbow-delimiters-mode)
-            (add-to-list 'ac-sources 'ac-source-yasnippet)
-            (setq buffer-save-without-query t)))
+;;; stop that last century behavior
+(turn-off-auto-fill)
 
 ;;command to align let statements
 ;;To use: M-x align-cljlet
-
-;;Treat hyphens as a word character when transposing words
-(defvar clojure-mode-with-hyphens-as-word-sep-syntax-table
-  (let ((st (make-syntax-table clojure-mode-syntax-table)))
-    (modify-syntax-entry ?- "w" st)
-    st))
-
-(setq auto-mode-alist (append '(("\\.cljs$" . clojure-mode))
-                              auto-mode-alist))
 
 (dolist (x '(scheme emacs-lisp lisp))
   (add-hook (intern (concat (symbol-name x) "-mode-hook")) 'paredit-mode)
@@ -360,14 +318,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   (quote
-    (tree-mode sublime-themes starter-kit-lisp starter-kit-eshell starter-kit-bindings starter-kit sr-speedbar smex scss-mode rainbow-delimiters protobuf-mode paredit nrepl-eval-sexp-fu monokai-theme markdown-mode magit less-css-mode json-mode js2-refactor ido-ubiquitous idle-highlight-mode handlebars-mode golint go-errcheck go-eldoc go-direx go-autocomplete flycheck find-file-in-project f elisp-slime-nav cyberpunk-theme align-cljlet ac-slime ac-nrepl ac-js2)))
+   '(sphinx-mode tree-mode sublime-themes starter-kit-lisp starter-kit-eshell starter-kit-bindings starter-kit sr-speedbar smex scss-mode rainbow-delimiters protobuf-mode paredit nrepl-eval-sexp-fu monokai-theme markdown-mode magit less-css-mode json-mode js2-refactor ido-ubiquitous idle-highlight-mode handlebars-mode golint go-errcheck go-eldoc go-direx go-autocomplete flycheck find-file-in-project f elisp-slime-nav cyberpunk-theme align-cljlet ac-slime ac-nrepl ac-js2))
  '(weblogger-config-alist
-   (quote
-    (("nexar-staging" "http://staging.www.getnexar.com/xmlrpc.php" "bruno" "" "1")))))
+   '(("nexar-staging" "http://staging.www.getnexar.com/xmlrpc.php" "bruno" "" "1"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:background nil)))))
