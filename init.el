@@ -167,6 +167,7 @@
 
 ;;; stop that last century behavior
 (turn-off-auto-fill)
+(remove-hook 'text-mode-hook #'turn-on-auto-fill)
 
 ;;command to align let statements
 ;;To use: M-x align-cljlet
